@@ -37,3 +37,6 @@ Usage
     app.run()
 
 
+Documentation
+-------------
+Complete documentation is available at `https://madame.readthedocs.org <https://madame.readthedocs.org>`_
