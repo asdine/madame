@@ -3,14 +3,21 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Madame's documentation!
-==================================
+Madame
+======
 
-Contents:
+Welcome to the Madame documentation site.
+
+Table of Contents
+-----------------
 
 .. toctree::
    :maxdepth: 2
 
+   intro
+   install
+   quickstart
+   tutorial
 
 
 Indices and tables
