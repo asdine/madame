@@ -228,7 +228,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'Madame', u'Madame Documentation',
-   u'Asdine El Hrychy', 'Madame', 'One line description of project.',
+   u'Asdine El Hrychy', 'Madame', 'RESTful API for MongoDB built on Flask.',
    'Miscellaneous'),
 ]
 
