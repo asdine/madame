@@ -22,21 +22,21 @@ CRUD
 ----
 Madame supports built-in CRUD operations.
 
-    ==============
+    ======= ======
     Action  Method
-    ==============
+    ======= ======
     Create  POST
     Read    GET
     Update  PATCH
     Update* POST
     Delete  DELETE
-    ==============
+    ======= ======
 
 *Update method can use POST or PATCH, whether the user updates the entire document or not.
 
 Schemas
 -------
-Madame keep database schemas separated from code, and uses JSON to describe them.
+Madame keeps database schemas separated from code, and uses JSON to describe them.
 To validate the data, it uses the strong schema validation library : `Validictory <https://github.com/sunlightlabs/validictory>`_. ::
 
   {
