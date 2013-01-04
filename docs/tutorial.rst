@@ -135,4 +135,76 @@ Now, launch it: ::
 -------------
 To use your beautiful server, you can use `Requests <https://requests.readthedocs.org/en/latest/>`_, curl or Ajax, or anything you want.
 
+Here is an example with curl : ::
+
+  $ curl -i http://localhost:5000/
+  HTTP/1.0 200 OK
+  Content-Type: application/json
+  Content-Length: 313
+  Server: Werkzeug/0.8.3 Python/2.7.3
+  Date: Fri, 04 Jan 2013 19:59:26 GMT
+
+  {
+    "title": "Content",
+    "description": "List of collections",
+    "links": [
+        {
+            "href": "http://localhost:5000/",
+            "description": "You are here.",
+            "rel": "self",
+            "title": "root"
+        },
+        {
+            "href": "http://localhost:5000/contacts/",
+            "description": "My contact list",
+            "rel": "child",
+            "title": "Contacts"
+        }
+    ]
+  }
+
+Let's add a new contact : ::
+
+  $ curl -i -d '{ "lastname" : "baggins", "firstname" : "bilbo", "phone-number" : "555-666" }' -H "Content-Type: application/json" http://localhost:5000/contacts/
+  HTTP/1.0 201 CREATED
+  Content-Type: application/json
+  Content-Length: 275
+  ETag: "4a98c403225da6cab1b8f5557492a3c370666fe0"
+  Server: Werkzeug/0.8.3 Python/2.7.3
+  Date: Fri, 04 Jan 2013 20:11:50 GMT
+
+  {
+    "title": "Document created",
+    "links": [
+        {
+            "href": "http://localhost:5000/contacts/",
+            "description": "You are here.",
+            "rel": "self", "title": "Contacts"
+        },
+        {
+            "href": "http://localhost:5000/contacts/50e737860ef3c42120601fae",
+            "rel": "item"
+        }
+    ]
+  }
+
+Then let's see the contact information : ::
+
+  $ curl -i http://localhost:5000/contacts/50e737860ef3c42120601fae
+  HTTP/1.0 200 OK
+  Content-Type: application/json
+  Content-Length: 237
+  ETag: "494abe2a6a10a3f8d12b93c22e0aa04fb1d5f168"
+  Server: Werkzeug/0.8.3 Python/2.7.3
+  Date: Fri, 04 Jan 2013 20:14:58 GMT
+
+  {
+    "_id": "50e737860ef3c42120601fae",
+    "firstname": "bilbo",
+    "lastname": "baggins",
+    "phone-number": "555-666",
+    "created": "Fri Jan  4 20:11:50 2013",
+    "updated": "Fri Jan  4 20:11:50 2013",
+    "etag": "494abe2a6a10a3f8d12b93c22e0aa04fb1d5f168"
+  }
 

@@ -8,10 +8,13 @@ Features
 --------
 - **REST-compliant**
 - **HATEOAS**
+- **Dynamic collections**
 - **JSON Schemas separated from code**
 - **JSON Validation**
 - **Cache**
 - **Versioning**
+- **Read-only by default**
+
 
 License
 -------
