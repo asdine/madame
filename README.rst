@@ -22,15 +22,15 @@ CRUD
 ----
 Madame supports built-in CRUD operations.
 
-    ======  ======
+    ======= ======
     Action  Method
-    ======  ======
+    ======= ======
     Create  POST
     Read    GET
     Update  PATCH
     Update* POST
     Delete  DELETE
-    ======  ======
+    ======= ======
 
 *Update method can use POST or PATCH, whether the user updates the entire document or not.
 
