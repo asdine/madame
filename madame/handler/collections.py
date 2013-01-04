@@ -123,7 +123,8 @@ class CollectionsHandler(MethodView):
         v = Validator()
         if v.validate(item, self.app.DOMAINS[collection]['schema']):
             item['created'] = item['updated'] = date_utc
-            item['_id'] = self.mongo.db[collection].insert(item)
+            id = self.mongo.db[collection].insert(item)
+            item = self.mongo.db[collection].find_one({"_id" : id})
             response = ({'created' : True, 'document' : item})
         else:
             response = ({'created' : False, 'issues' : v.error})
