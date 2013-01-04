@@ -168,7 +168,6 @@ As Madame is built on Flask, you can still use it as a normal website.
     from flask import render_template
 
     app = Madame('/ajax')
-    app.run()
 
     @app.route('/')
     def index():
