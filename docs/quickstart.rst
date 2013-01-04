@@ -3,8 +3,8 @@ Usage
 
 Using Madame is very simple.
 
-Prerequisite
-------------
+Prerequisites
+-------------
 Madame needs MongoDB to work properly.
 To do so, install it from `MongoDB's website <http://www.mongodb.org/>`_.
 
@@ -14,7 +14,7 @@ First, import the module::
 
   >>> from madame import Madame
 
-Then instanciate the Madame class::
+Then instantiate the Madame class::
 
   >>> app = Madame()
 

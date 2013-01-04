@@ -26,13 +26,13 @@ But we don't want to be able to:
 
 1 - The folders
 ---------------
-Create a folder called **MadameBook** on your computer.
+Create a folder called ``MadameBook`` on your computer.
 
 `Download <http://www.mongodb.org/>`_ and install MongoDB anywhere.
 
 2 - The configuration
 ---------------------
-Create a file called **config.py** at the root of your folder, this file will be automatically loaded by Madame.
+Create a file called ``config.py`` at the root of your folder, this file will be automatically loaded by Madame.
 
 If you have installed MongoDB on localhost and haven't changed the port, you can skip these lines.
 
@@ -41,7 +41,7 @@ Otherwise, add theses lines in your config file::
   MONGO_HOST = <IP>
   MONGO_PORT = <PORT>
 
-Change <IP> and <PORT> by the actual ip address and port of the server where MongoDB is installed.
+Change ``<IP>`` and ``<PORT>`` by the actual ip address and port of the server where MongoDB is installed.
 
 3 - The Database Schema
 -----------------------
@@ -49,7 +49,7 @@ Now, we need to describe our data.
 
 Madame uses JSON format to do so, and `validictory <https://validictory.readthedocs.org/en/latest/>`_ to validate the data.
 
-Create a file called **schemas.json** at the root of your folder.::
+Create a file called ``schemas.json`` at the root of your folder.::
 
   {
       "contacts": {
@@ -84,7 +84,7 @@ It will be used in the url::
 
   GET http://localhost:5000/contacts/
 
-The value of **"schemas"** follows `validictory <https://validictory.readthedocs.org/en/latest/>`_ format. You can add as much schemas as you want inside this file.
+The value of ``"schemas"`` follows `validictory <https://validictory.readthedocs.org/en/latest/>`_ format. You can add as much schemas as you want inside this file.
 
 Now, we need to tell Madame about our schema file.
 
@@ -95,7 +95,7 @@ Add this line in your configuration file: ::
 
 4 - The methods allowed
 -----------------------
-Madame is read-only by default. It means that only the GET methods are allowed for the various urls.
+Madame is read-only by default. It means that only the ``GET`` methods are allowed for the various urls.
 
 Here's what we want to be allowed: ::
 
@@ -110,7 +110,7 @@ Here's what is allowed by default: ::
   GET       /contacts/
   GET       /contacts/id/
 
-To add the POST method on our collection, we need to tell it to Madame.
+To add the ``POST`` method on our collection, we need to tell it to Madame.
 Add the following line in your configuration file: ::
 
   COLLECTION_POST = True
@@ -119,7 +119,7 @@ Add the following line in your configuration file: ::
 --------------
 Now that our configuration is set, we need to launch the server.
 
-Create a file called **server.py**. ::
+Create a file called ``server.py``. ::
 
   from madame import Madame
 
@@ -133,9 +133,9 @@ Now, launch it: ::
 
 6 - The final
 -------------
-To use your beautiful server, you can use `Requests <https://requests.readthedocs.org/en/latest/>`_, curl or Ajax, or anything you want.
+To use your beautiful server, you can use `Requests <https://requests.readthedocs.org/en/latest/>`_, ``curl``, ``Ajax``, or anything you want.
 
-Here is an example with curl : ::
+Here is an example with ``curl`` : ::
 
   $ curl -i http://localhost:5000/
   HTTP/1.0 200 OK
@@ -194,7 +194,7 @@ Then let's see the contact information : ::
   HTTP/1.0 200 OK
   Content-Type: application/json
   Content-Length: 237
-  ETag: "494abe2a6a10a3f8d12b93c22e0aa04fb1d5f168"
+  ETag: "4a98c403225da6cab1b8f5557492a3c370666fe0"
   Server: Werkzeug/0.8.3 Python/2.7.3
   Date: Fri, 04 Jan 2013 20:14:58 GMT
 
@@ -205,6 +205,6 @@ Then let's see the contact information : ::
     "phone-number": "555-666",
     "created": "Fri Jan  4 20:11:50 2013",
     "updated": "Fri Jan  4 20:11:50 2013",
-    "etag": "494abe2a6a10a3f8d12b93c22e0aa04fb1d5f168"
+    "etag": "4a98c403225da6cab1b8f5557492a3c370666fe0"
   }
 

@@ -183,7 +183,7 @@ Future
 - Highly customizable
 - Authentication
 - Pagination
-- GET /<collection>/<chosenIdentifier>
+- ``GET /<collection>/<chosenIdentifier>``
 
 and so on.
 

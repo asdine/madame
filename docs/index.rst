@@ -3,14 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Madame
-======
-
-Welcome to the Madame documentation site.
-
-Table of Contents
------------------
-
+Madame Developer Guide
+======================
 .. toctree::
    :maxdepth: 2
 
@@ -18,11 +12,5 @@ Table of Contents
    install
    quickstart
    tutorial
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
+   configuration
 
