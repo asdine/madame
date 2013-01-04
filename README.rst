@@ -202,7 +202,9 @@ Madame is MIT licensed. See the `LICENSE <https://github.com/asdine/madame/blob/
 Credits
 -------
 `Flask <http://flask.pocoo.org/>`_
+
 `Pymongo <http://api.mongodb.org/python/current/>`_
+
 `Validictory <https://github.com/sunlightlabs/validictory>`_
 
 Authors
