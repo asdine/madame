@@ -90,7 +90,7 @@ Now, we need to tell Madame about our schema file.
 
 Add this line in your configuration file: ::
 
-  SCHEMAS_FILE = "schemas.json"
+  SCHEMA_FILE = "schemas.json"
 
 
 4 - The methods allowed
