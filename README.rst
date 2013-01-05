@@ -211,6 +211,6 @@ Authors
 Madame is developped by Asdine El Hrychy.
 See the `AUTHORS <https://github.com/asdine/madame/blob/master/AUTHORS>`_ for details.
 
-- `Twitter <https://twitter.com/asdingue>`_
+- `Twitter <https://twitter.com/asdine_>`_
 
 
