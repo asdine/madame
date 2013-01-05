@@ -116,7 +116,7 @@ class Madame(Flask):
         root = RootHandler.as_view('root', app=self, mongo=self.mongo)
         collections = CollectionsHandler.as_view('collection', app=self, mongo=self.mongo)
         items = ItemsHandler.as_view('items', app=self, mongo=self.mongo)
-        self.root.add_url_rule('/', view_func=root, methods=['GET', 'POST', 'PATCH'])
-        self.root.add_url_rule('/<string:collection>/', view_func=collections, methods=['GET', 'POST', 'DELETE'])
-        self.root.add_url_rule('/<string:collection>/<ObjectId:id>', view_func=items, methods=['GET', 'PATCH', 'DELETE'])
+        self.root.add_url_rule('/', view_func=root, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+        self.root.add_url_rule('/<string:collection>/', view_func=collections, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+        self.root.add_url_rule('/<string:collection>/<ObjectId:id>', view_func=items, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
 

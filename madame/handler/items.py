@@ -21,7 +21,7 @@ from simplejson import JSONDecodeError
 from werkzeug.exceptions import abort
 
 class ItemsHandler(MethodView):
-    def __init__(self, app, mongo, response_type='json'):
+    def __init__(self, app, mongo):
         self.app = app
         self.mongo = mongo
 
@@ -43,7 +43,7 @@ class ItemsHandler(MethodView):
 
     def put(self, collection, id):
         """
-        Route : PATCH /<collection>/<id>
+        Route : PUT /<collection>/<id>
         Description : Updates the document.
         Returns the status.
         """
