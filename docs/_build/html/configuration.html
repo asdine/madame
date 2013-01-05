@@ -1,0 +1,288 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Configuration &mdash; Madame documentation</title>
+    
+    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Madame documentation" href="index.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tutorial.html" title="Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Madame documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>Madame doesn&#8217;t necessarily need a configuration file, but it can be very helpful to create one if you want to change your server&#8217;s behaviour.</p>
+<div class="section" id="configuration-file">
+<h2>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>As Flask, Madame can handle configuration in two ways.</p>
+<p>You can choose between one of those two, or use both for one to be more global and the other more specific.</p>
+<div class="section" id="from-an-environment-variable">
+<h3>From an environment variable<a class="headerlink" href="#from-an-environment-variable" title="Permalink to this headline">¶</a></h3>
+<p>Create your file wherever you want on your server. Then, you need to create an environment variable called <tt class="docutils literal"><span class="pre">MADAME_SETTINGS</span></tt> and set its value with the path of your file.</p>
+<div class="highlight-python"><pre>$ touch /path/to/your/configfile.py
+$ export MADAME_SETTINGS=/path/to/your/configfile.py</pre>
+</div>
+</div>
+<div class="section" id="from-the-root-of-your-application">
+<h3>From the root of your application<a class="headerlink" href="#from-the-root-of-your-application" title="Permalink to this headline">¶</a></h3>
+<p>Create the file at the root of your application.
+The file name has to be <tt class="docutils literal"><span class="pre">config.py</span></tt>.</p>
+<div class="highlight-python"><pre>$ cd /path/to/your/application
+$ touch config.py</pre>
+</div>
+</div>
+</div>
+<div class="section" id="builtin-configuration-values">
+<h2>Builtin configuration values<a class="headerlink" href="#builtin-configuration-values" title="Permalink to this headline">¶</a></h2>
+<p>You can use all of the <a class="reference external" href="http://flask.pocoo.org/docs/config/#builtin-configuration-values">Flask configuration values</a>.</p>
+<p>Here are some useful values:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="50%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+<th class="head">Default value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>DEBUG</td>
+<td>enable/disable debug mode.</td>
+<td><tt class="docutils literal"><span class="pre">True</span></tt></td>
+</tr>
+<tr class="row-odd"><td>MONGO_HOST</td>
+<td>The host name or IP address of your MongoDB server.</td>
+<td><tt class="docutils literal"><span class="pre">&quot;localhost&quot;</span></tt></td>
+</tr>
+<tr class="row-even"><td>MONGO_PORT</td>
+<td>The port number of your MongoDB server.</td>
+<td><tt class="docutils literal"><span class="pre">27017</span></tt></td>
+</tr>
+<tr class="row-odd"><td>MONGO_USERNAME</td>
+<td>The user name for authentication.</td>
+<td><tt class="docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr class="row-even"><td>MONGO_PASSWORD</td>
+<td>The password for authentication.</td>
+<td><tt class="docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>Madame has also its own values:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="50%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Description</th>
+<th class="head">Default value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SCHEMA_FILE</td>
+<td>describes the name of the schema file.</td>
+<td><tt class="docutils literal"><span class="pre">None</span></tt></td>
+</tr>
+<tr class="row-odd"><td>ROOT_GET</td>
+<td>enable/disable GET method on root.</td>
+<td><tt class="docutils literal"><span class="pre">True</span></tt></td>
+</tr>
+<tr class="row-even"><td>ROOT_POST</td>
+<td>enable/disable POST method on root.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-odd"><td>ROOT_DELETE</td>
+<td>enable/disable DELETE method on root.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-even"><td>COLLECTION_GET</td>
+<td>enable/disable GET method on collections.</td>
+<td><tt class="docutils literal"><span class="pre">True</span></tt></td>
+</tr>
+<tr class="row-odd"><td>COLLECTION_POST</td>
+<td>enable/disable POST method on collections.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-even"><td>COLLECTION_DELETE</td>
+<td>enable/disable DELETE method on collections.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-odd"><td>ITEM_GET</td>
+<td>enable/disable GET method on items.</td>
+<td><tt class="docutils literal"><span class="pre">True</span></tt></td>
+</tr>
+<tr class="row-even"><td>ITEM_PUT</td>
+<td>enable/disable PUT method on items.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-odd"><td>ITEM_DELETE</td>
+<td>enable/disable DELETE method on items.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-even"><td>ROOT_TITLE</td>
+<td>sets the root title that is displayed in responses.</td>
+<td><tt class="docutils literal"><span class="pre">&quot;Content&quot;</span></tt></td>
+</tr>
+<tr class="row-odd"><td>ROOT_DESCRIPTION</td>
+<td>sets the root title that is displayed in responses.</td>
+<td><tt class="docutils literal"><span class="pre">&quot;List</span> <span class="pre">of</span> <span class="pre">collections&quot;</span></tt></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo">
+    <a href="index.html">
+        <img class="logo" src="_static/logo.png" style="margin-bottom: 20px;" alt="Logo"/>
+    </a>
+</p>
+
+<p>
+<iframe src="http://ghbtns.com/github-btn.html?user=asdine&repo=madame&type=watch&count=true&size=large"
+        allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<p>
+    Madame is an easy-to-use RESTful API for Python and MongoDB. You are currently looking at the documentation of the development version.
+</p>
+
+
+<h3>Donate</h3>
+<p>
+    If you love Madame, consider supporting the author <a href="https://www.gittip.com/asdine/">on Gittip</a>:
+</p>
+<p>
+<iframe style="border: 0; margin: 0; padding: 0;"
+        src="https://www.gittip.com/asdine/widget.html"
+        width="48pt" height="20pt"></iframe>
+</p>
+
+<h3>Feedback</h3>
+<p>
+    Feedback is greatly appreciated. If you have any questions, comments,
+    random praise, or anonymous threats, <a href="mailto:asdine.elhrychy@gmail.com">
+    shoot me an email</a>.
+</p>
+
+
+<h3>Useful Links</h3>
+<ul>
+    <li><a href="http://pypi.python.org/pypi/madame">Madame @ PyPI</a></li>
+    <li><a href="http://github.com/asdine/madame">Madame @ GitHub</a></li>
+    <li><a href="http://github.com/asdine/madame/issues">Issue Tracker</a></li>
+</ul>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Configuration</a><ul>
+<li><a class="reference internal" href="#configuration-file">Configuration file</a><ul>
+<li><a class="reference internal" href="#from-an-environment-variable">From an environment variable</a></li>
+<li><a class="reference internal" href="#from-the-root-of-your-application">From the root of your application</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#builtin-configuration-values">Builtin configuration values</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="tutorial.html" title="previous chapter">Tutorial</a></li>
+  </ul></li>
+</ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/configuration.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2013, Asdine El Hrychy.
+    </div>
+    <a href="https://github.com/asdine/madame" class="github">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
+    </a>
+
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-37446535-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+  </body>
+</html>
