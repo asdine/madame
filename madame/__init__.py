@@ -10,7 +10,7 @@
     :license: MIT, see LICENSE for more details.
 """
 
-__version__ = '0.1.1'
+__version__ = '0.1.2.a'
 __author__  = 'Asdine El Hrychy'
 __license__ = 'MIT'
 

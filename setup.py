@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='madame',
-    version='0.1.1',
+    version='0.1.2.a',
     packages=find_packages(),
     url='http://github.com/asdine/madame',
     author='Asdine El Hrychy',

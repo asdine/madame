@@ -32,7 +32,7 @@ Madame supports built-in CRUD operations.
     Delete  DELETE
     ======= ======
 
-*Update method can use POST or PATCH, whether the user updates the entire document or not.
+\*Update method can use POST or PATCH, whether the user updates the entire document or not.
 
 Schemas
 -------
