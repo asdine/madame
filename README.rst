@@ -97,7 +97,7 @@ You can add and delete new schemas without turning the servers off and use them 
   >>> print r.status_code
   201
 
-You can then add new pets on your collection. ::
+You can then add new pets in your collection. ::
 
   $ curl -i -d '{ "name" : "Betise" }' -H "Content-Type: application/json" http://localhost:5000/pets/
   HTTP/1.0 201 CREATED
@@ -210,4 +210,7 @@ Authors
 -------
 Madame is developped by Asdine El Hrychy.
 See the `AUTHORS <https://github.com/asdine/madame/blob/master/AUTHORS>`_ for details.
+
+- `Twitter <https://twitter.com/asdingue>`_
+
 
