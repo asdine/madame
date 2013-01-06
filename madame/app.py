@@ -28,7 +28,11 @@ class Madame(Flask):
 
     Extend `Flask`
     """
-    def __init__(self, root_url=None, template_folder=None):
+    def __init__(self, root_url=None,
+                 template_folder=None,
+                 root_methods=None,
+                 collection_methods=None,
+                 item_methods=None):
         """
 
         :param root_url: root url for Madame
@@ -38,10 +42,14 @@ class Madame(Flask):
         if template_folder is None:
             template_folder = os.path.join(get_main_path(), "templates")
         super(Madame, self).__init__(__package__, template_folder=template_folder)
+        self.root_methods = root_methods
+        self.collection_methods = collection_methods
+        self.item_methods = item_methods
+        self.root_url = root_url
         self.load_config()
         self.init_database()
         self.load_schemas()
-        self.register(root_url)
+        self.register()
 
     def load_config(self):
         """Loads config from default_settings.py, then tries to
@@ -93,16 +101,16 @@ class Madame(Flask):
             logging.error(str(e))
             exit(1)
 
-    def register(self, root_url):
+    def register(self):
         """If the user has chosen a root url for the application,
         this function sets and register a blueprint for it.
         """
-        if root_url is not None:
-            self.root = Blueprint('madame', __package__, url_prefix=root_url)
+        if self.root_url is not None:
+            self.root = Blueprint('madame', __package__, url_prefix=self.root_url)
         else:
             self.root = self
         self.init_routes()
-        if root_url is not None:
+        if self.root_url is not None:
             self.register_blueprint(self.root)
 
     def init_routes(self):
