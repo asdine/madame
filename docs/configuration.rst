@@ -1,9 +1,11 @@
-Configuration
-=============
+.. _configuration:
+
+Configuration Handling
+======================
 
 Madame doesn't necessarily need a configuration file, but it can be very helpful to create one if you want to change your server's behaviour.
 
-Configuration file
+The configuration file
 ------------------
 As Flask, Madame can handle configuration in two ways.
 
@@ -62,11 +64,17 @@ Madame has also its own values:
 +-------------------+-------------------------------------------------------+-------------------------------------+
 | COLLECTION_POST   | enable/disable POST method on collections.            | ``False``                           |
 +-------------------+-------------------------------------------------------+-------------------------------------+
+| COLLECTION_PUT    | enable/disable PUT method on collections.             | ``False``                           |
++-------------------+-------------------------------------------------------+-------------------------------------+
+| COLLECTION_PATCH  | enable/disable PATCH method on collections.           | ``False``                           |
++-------------------+-------------------------------------------------------+-------------------------------------+
 | COLLECTION_DELETE | enable/disable DELETE method on collections.          | ``False``                           |
 +-------------------+-------------------------------------------------------+-------------------------------------+
 | ITEM_GET          | enable/disable GET method on items.                   | ``True``                            |
 +-------------------+-------------------------------------------------------+-------------------------------------+
 | ITEM_PUT          | enable/disable PUT method on items.                   | ``False``                           |
++-------------------+-------------------------------------------------------+-------------------------------------+
+| ITEM_PATCH        | enable/disable PATCH method on items.                 | ``False``                           |
 +-------------------+-------------------------------------------------------+-------------------------------------+
 | ITEM_DELETE       | enable/disable DELETE method on items.                | ``False``                           |
 +-------------------+-------------------------------------------------------+-------------------------------------+

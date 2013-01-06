@@ -5,13 +5,13 @@ Installation
 
 This part of the documentation covers the installation of Madame.
 
-Pip and Easy_install
+Pip and easy_install
 --------------------
 You can install Madame using ``pip`` ::
 
   $ pip install madame
 
-or with easy_install::
+or using easy_install::
 
   $ easy_install madame
 

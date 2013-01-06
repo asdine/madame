@@ -79,7 +79,7 @@ These libraries are not documented here. If you want to dive into their document
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install.html#pip-and-easy-install">Pip and Easy_install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#pip-and-easy-install">Pip and easy_install</a></li>
 <li class="toctree-l2"><a class="reference internal" href="install.html#source-code">Source Code</a></li>
 </ul>
 </li>
@@ -89,18 +89,23 @@ These libraries are not documented here. If you want to dive into their document
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-goal">0 - The goal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-folders">1 - The folders</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-configuration">2 - The configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-database-schema">3 - The Database Schema</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-methods-allowed">4 - The methods allowed</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-server">5 - The server</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-final">6 - The final</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#the-goal">The goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#step-1-the-folders">Step 1 - The folders</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#step-2-the-configuration">Step 2 - The configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#step-3-the-database-schema">Step 3 - The Database Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#step-4-the-methods-allowed">Step 4 - The methods allowed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#step-5-the-server">Step 5 - The server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial.html#examples">Examples</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="configuration.html#configuration-file">Configuration file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration Handling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html#the-configuration-file">The configuration file</a></li>
 <li class="toctree-l2"><a class="reference internal" href="configuration.html#builtin-configuration-values">Builtin configuration values</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="schemas.html">Schemas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="schemas.html#the-schema-file">The schema file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="schemas.html#adding-schemas-with-post">Adding schemas with POST</a></li>
 </ul>
 </li>
 </ul>
@@ -153,10 +158,12 @@ These libraries are not documented here. If you want to dive into their document
     <li><a href="http://github.com/asdine/madame">Madame @ GitHub</a></li>
     <li><a href="http://github.com/asdine/madame/issues">Issue Tracker</a></li>
 </ul>
-<a href="https://twitter.com/asdine_" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @asdine_</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div style="margin-bottom: 10px;">
+    <a href="https://twitter.com/asdine_" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @asdine_</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
 <!-- Placez cette balise où vous souhaitez faire apparaître le gadget Bouton +1. -->
-<div class="g-plusone" style="margin-top : 20px;"></div>
+<div class="g-plusone"></div>
 
 <!-- Placez cette ballise après la dernière balise Bouton +1. -->
 <script type="text/javascript">

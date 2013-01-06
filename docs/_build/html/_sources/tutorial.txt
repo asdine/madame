@@ -1,3 +1,5 @@
+.. _tutorial:
+
 Tutorial
 ========
 
@@ -5,7 +7,7 @@ This part of the documentation will help you learn how to use Madame by example.
 
 In this tutorial, we will create a simple address book called MadameBook.
 
-0 - The goal
+The goal
 ------------
 When you setup a new Madame server, you need to think about what methods you want to be allowed for users and what methods you don't.
 
@@ -24,13 +26,13 @@ But we don't want to be able to:
 * Add new collections
 * Delete collections
 
-1 - The folders
+Step 1 - The folders
 ---------------
 Create a folder called ``MadameBook`` on your computer.
 
 `Download <http://www.mongodb.org/>`_ and install MongoDB anywhere.
 
-2 - The configuration
+Step 2 - The configuration
 ---------------------
 Create a file called ``config.py`` at the root of your folder, this file will be automatically loaded by Madame.
 
@@ -43,7 +45,7 @@ Otherwise, add theses lines in your config file::
 
 Change ``<IP>`` and ``<PORT>`` by the actual ip address and port of the server where MongoDB is installed.
 
-3 - The Database Schema
+Step 3 - The Database Schema
 -----------------------
 Now, we need to describe our data.
 
@@ -93,7 +95,7 @@ Add this line in your configuration file: ::
   SCHEMA_FILE = "schemas.json"
 
 
-4 - The methods allowed
+Step 4 - The methods allowed
 -----------------------
 Madame is read-only by default. It means that only the ``GET`` methods are allowed for the various urls.
 
@@ -115,7 +117,7 @@ Add the following line in your configuration file: ::
 
   COLLECTION_POST = True
 
-5 - The server
+Step 5 - The server
 --------------
 Now that our configuration is set, we need to launch the server.
 
@@ -131,19 +133,13 @@ Now, launch it: ::
 
   $ python server.py
 
-6 - The final
--------------
+Examples
+--------
 To use your beautiful server, you can use `Requests <https://requests.readthedocs.org/en/latest/>`_, ``curl``, ``Ajax``, or anything you want.
 
 Here is an example with ``curl`` : ::
 
-  $ curl -i http://localhost:5000/
-  HTTP/1.0 200 OK
-  Content-Type: application/json
-  Content-Length: 313
-  Server: Werkzeug/0.8.3 Python/2.7.3
-  Date: Fri, 04 Jan 2013 19:59:26 GMT
-
+  $ curl http://localhost:5000/
   {
     "title": "Content",
     "description": "List of collections",
@@ -165,21 +161,15 @@ Here is an example with ``curl`` : ::
 
 Let's add a new contact : ::
 
-  $ curl -i -d '{ "lastname" : "baggins", "firstname" : "bilbo", "phone-number" : "555-666" }' -H "Content-Type: application/json" http://localhost:5000/contacts/
-  HTTP/1.0 201 CREATED
-  Content-Type: application/json
-  Content-Length: 275
-  ETag: "4a98c403225da6cab1b8f5557492a3c370666fe0"
-  Server: Werkzeug/0.8.3 Python/2.7.3
-  Date: Fri, 04 Jan 2013 20:11:50 GMT
-
+  $ curl -d '{ "lastname" : "baggins", "firstname" : "bilbo", "phone-number" : "555-666" }' -H "Content-Type: application/json" http://localhost:5000/contacts/
   {
     "title": "Document created",
     "links": [
         {
             "href": "http://localhost:5000/contacts/",
             "description": "You are here.",
-            "rel": "self", "title": "Contacts"
+            "rel": "self",
+            "title": "Contacts"
         },
         {
             "href": "http://localhost:5000/contacts/50e737860ef3c42120601fae",
@@ -190,14 +180,7 @@ Let's add a new contact : ::
 
 Then let's see the contact information : ::
 
-  $ curl -i http://localhost:5000/contacts/50e737860ef3c42120601fae
-  HTTP/1.0 200 OK
-  Content-Type: application/json
-  Content-Length: 237
-  ETag: "4a98c403225da6cab1b8f5557492a3c370666fe0"
-  Server: Werkzeug/0.8.3 Python/2.7.3
-  Date: Fri, 04 Jan 2013 20:14:58 GMT
-
+  $ curl http://localhost:5000/contacts/50e737860ef3c42120601fae
   {
     "_id": "50e737860ef3c42120601fae",
     "firstname": "bilbo",

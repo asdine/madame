@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &mdash; Madame documentation</title>
+    <title>Configuration Handling &mdash; Madame documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -25,6 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Madame documentation" href="index.html" />
+    <link rel="next" title="Schemas" href="schemas.html" />
     <link rel="prev" title="Tutorial" href="tutorial.html" />
    
   
@@ -39,6 +40,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="schemas.html" title="Schemas"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="tutorial.html" title="Tutorial"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">Madame documentation</a> &raquo;</li> 
@@ -50,11 +54,11 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="configuration">
-<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="configuration-handling">
+<span id="configuration"></span><h1>Configuration Handling<a class="headerlink" href="#configuration-handling" title="Permalink to this headline">¶</a></h1>
 <p>Madame doesn&#8217;t necessarily need a configuration file, but it can be very helpful to create one if you want to change your server&#8217;s behaviour.</p>
-<div class="section" id="configuration-file">
-<h2>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-configuration-file">
+<h2>The configuration file<a class="headerlink" href="#the-configuration-file" title="Permalink to this headline">¶</a></h2>
 <p>As Flask, Madame can handle configuration in two ways.</p>
 <p>You can choose between one of those two, or use both for one to be more global and the other more specific.</p>
 <div class="section" id="from-an-environment-variable">
@@ -150,6 +154,14 @@ $ touch config.py</pre>
 <td>enable/disable POST method on collections.</td>
 <td><tt class="docutils literal"><span class="pre">False</span></tt></td>
 </tr>
+<tr class="row-even"><td>COLLECTION_PUT</td>
+<td>enable/disable PUT method on collections.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-odd"><td>COLLECTION_PATCH</td>
+<td>enable/disable PATCH method on collections.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
 <tr class="row-even"><td>COLLECTION_DELETE</td>
 <td>enable/disable DELETE method on collections.</td>
 <td><tt class="docutils literal"><span class="pre">False</span></tt></td>
@@ -162,15 +174,19 @@ $ touch config.py</pre>
 <td>enable/disable PUT method on items.</td>
 <td><tt class="docutils literal"><span class="pre">False</span></tt></td>
 </tr>
-<tr class="row-odd"><td>ITEM_DELETE</td>
+<tr class="row-odd"><td>ITEM_PATCH</td>
+<td>enable/disable PATCH method on items.</td>
+<td><tt class="docutils literal"><span class="pre">False</span></tt></td>
+</tr>
+<tr class="row-even"><td>ITEM_DELETE</td>
 <td>enable/disable DELETE method on items.</td>
 <td><tt class="docutils literal"><span class="pre">False</span></tt></td>
 </tr>
-<tr class="row-even"><td>ROOT_TITLE</td>
+<tr class="row-odd"><td>ROOT_TITLE</td>
 <td>sets the root title that is displayed in responses.</td>
 <td><tt class="docutils literal"><span class="pre">&quot;Content&quot;</span></tt></td>
 </tr>
-<tr class="row-odd"><td>ROOT_DESCRIPTION</td>
+<tr class="row-even"><td>ROOT_DESCRIPTION</td>
 <td>sets the root title that is displayed in responses.</td>
 <td><tt class="docutils literal"><span class="pre">&quot;List</span> <span class="pre">of</span> <span class="pre">collections&quot;</span></tt></td>
 </tr>
@@ -224,7 +240,7 @@ $ touch config.py</pre>
     <li><a href="http://github.com/asdine/madame">Madame @ GitHub</a></li>
     <li><a href="http://github.com/asdine/madame/issues">Issue Tracker</a></li>
 </ul>
-<div style="margin-bottom: 30px;">
+<div style="margin-bottom: 10px;">
     <a href="https://twitter.com/asdine_" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @asdine_</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
@@ -241,8 +257,8 @@ $ touch config.py</pre>
 </script>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Configuration</a><ul>
-<li><a class="reference internal" href="#configuration-file">Configuration file</a><ul>
+<li><a class="reference internal" href="#">Configuration Handling</a><ul>
+<li><a class="reference internal" href="#the-configuration-file">The configuration file</a><ul>
 <li><a class="reference internal" href="#from-an-environment-variable">From an environment variable</a></li>
 <li><a class="reference internal" href="#from-the-root-of-your-application">From the root of your application</a></li>
 </ul>
@@ -255,6 +271,7 @@ $ touch config.py</pre>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="tutorial.html" title="previous chapter">Tutorial</a></li>
+      <li>Next: <a href="schemas.html" title="next chapter">Schemas</a></li>
   </ul></li>
 </ul>
   <h3>This Page</h3>

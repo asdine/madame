@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="Madame documentation" href="index.html" />
-    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="next" title="Configuration Handling" href="configuration.html" />
     <link rel="prev" title="Usage" href="quickstart.html" />
    
   
@@ -40,7 +40,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="configuration.html" title="Configuration"
+          <a href="configuration.html" title="Configuration Handling"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="quickstart.html" title="Usage"
@@ -55,11 +55,11 @@
           <div class="body">
             
   <div class="section" id="tutorial">
-<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<span id="id1"></span><h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
 <p>This part of the documentation will help you learn how to use Madame by example.</p>
 <p>In this tutorial, we will create a simple address book called MadameBook.</p>
 <div class="section" id="the-goal">
-<h2>0 - The goal<a class="headerlink" href="#the-goal" title="Permalink to this headline">¶</a></h2>
+<h2>The goal<a class="headerlink" href="#the-goal" title="Permalink to this headline">¶</a></h2>
 <p>When you setup a new Madame server, you need to think about what methods you want to be allowed for users and what methods you don&#8217;t.</p>
 <p>For our address book, we want to :</p>
 <ul class="simple">
@@ -77,13 +77,13 @@
 <li>Delete collections</li>
 </ul>
 </div>
-<div class="section" id="the-folders">
-<h2>1 - The folders<a class="headerlink" href="#the-folders" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-1-the-folders">
+<h2>Step 1 - The folders<a class="headerlink" href="#step-1-the-folders" title="Permalink to this headline">¶</a></h2>
 <p>Create a folder called <tt class="docutils literal"><span class="pre">MadameBook</span></tt> on your computer.</p>
 <p><a class="reference external" href="http://www.mongodb.org/">Download</a> and install MongoDB anywhere.</p>
 </div>
-<div class="section" id="the-configuration">
-<h2>2 - The configuration<a class="headerlink" href="#the-configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-2-the-configuration">
+<h2>Step 2 - The configuration<a class="headerlink" href="#step-2-the-configuration" title="Permalink to this headline">¶</a></h2>
 <p>Create a file called <tt class="docutils literal"><span class="pre">config.py</span></tt> at the root of your folder, this file will be automatically loaded by Madame.</p>
 <p>If you have installed MongoDB on localhost and haven&#8217;t changed the port, you can skip these lines.</p>
 <p>Otherwise, add theses lines in your config file:</p>
@@ -92,8 +92,8 @@ MONGO_PORT = &lt;PORT&gt;</pre>
 </div>
 <p>Change <tt class="docutils literal"><span class="pre">&lt;IP&gt;</span></tt> and <tt class="docutils literal"><span class="pre">&lt;PORT&gt;</span></tt> by the actual ip address and port of the server where MongoDB is installed.</p>
 </div>
-<div class="section" id="the-database-schema">
-<h2>3 - The Database Schema<a class="headerlink" href="#the-database-schema" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-3-the-database-schema">
+<h2>Step 3 - The Database Schema<a class="headerlink" href="#step-3-the-database-schema" title="Permalink to this headline">¶</a></h2>
 <p>Now, we need to describe our data.</p>
 <p>Madame uses JSON format to do so, and <a class="reference external" href="https://validictory.readthedocs.org/en/latest/">validictory</a> to validate the data.</p>
 <p>Create a file called <tt class="docutils literal"><span class="pre">schemas.json</span></tt> at the root of your folder.:</p>
@@ -136,8 +136,8 @@ MONGO_PORT = &lt;PORT&gt;</pre>
 </pre></div>
 </div>
 </div>
-<div class="section" id="the-methods-allowed">
-<h2>4 - The methods allowed<a class="headerlink" href="#the-methods-allowed" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-4-the-methods-allowed">
+<h2>Step 4 - The methods allowed<a class="headerlink" href="#step-4-the-methods-allowed" title="Permalink to this headline">¶</a></h2>
 <p>Madame is read-only by default. It means that only the <tt class="docutils literal"><span class="pre">GET</span></tt> methods are allowed for the various urls.</p>
 <p>Here&#8217;s what we want to be allowed:</p>
 <div class="highlight-python"><pre>GET       /
@@ -156,8 +156,8 @@ Add the following line in your configuration file:</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="the-server">
-<h2>5 - The server<a class="headerlink" href="#the-server" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="step-5-the-server">
+<h2>Step 5 - The server<a class="headerlink" href="#step-5-the-server" title="Permalink to this headline">¶</a></h2>
 <p>Now that our configuration is set, we need to launch the server.</p>
 <p>Create a file called <tt class="docutils literal"><span class="pre">server.py</span></tt>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">madame</span> <span class="kn">import</span> <span class="n">Madame</span>
@@ -171,17 +171,11 @@ Add the following line in your configuration file:</p>
 <div class="highlight-python"><pre>$ python server.py</pre>
 </div>
 </div>
-<div class="section" id="the-final">
-<h2>6 - The final<a class="headerlink" href="#the-final" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>To use your beautiful server, you can use <a class="reference external" href="https://requests.readthedocs.org/en/latest/">Requests</a>, <tt class="docutils literal"><span class="pre">curl</span></tt>, <tt class="docutils literal"><span class="pre">Ajax</span></tt>, or anything you want.</p>
 <p>Here is an example with <tt class="docutils literal"><span class="pre">curl</span></tt> :</p>
-<div class="highlight-python"><pre>$ curl -i http://localhost:5000/
-HTTP/1.0 200 OK
-Content-Type: application/json
-Content-Length: 313
-Server: Werkzeug/0.8.3 Python/2.7.3
-Date: Fri, 04 Jan 2013 19:59:26 GMT
-
+<div class="highlight-python"><pre>$ curl http://localhost:5000/
 {
   "title": "Content",
   "description": "List of collections",
@@ -202,21 +196,15 @@ Date: Fri, 04 Jan 2013 19:59:26 GMT
 }</pre>
 </div>
 <p>Let&#8217;s add a new contact :</p>
-<div class="highlight-python"><pre>$ curl -i -d '{ "lastname" : "baggins", "firstname" : "bilbo", "phone-number" : "555-666" }' -H "Content-Type: application/json" http://localhost:5000/contacts/
-HTTP/1.0 201 CREATED
-Content-Type: application/json
-Content-Length: 275
-ETag: "4a98c403225da6cab1b8f5557492a3c370666fe0"
-Server: Werkzeug/0.8.3 Python/2.7.3
-Date: Fri, 04 Jan 2013 20:11:50 GMT
-
+<div class="highlight-python"><pre>$ curl -d '{ "lastname" : "baggins", "firstname" : "bilbo", "phone-number" : "555-666" }' -H "Content-Type: application/json" http://localhost:5000/contacts/
 {
   "title": "Document created",
   "links": [
       {
           "href": "http://localhost:5000/contacts/",
           "description": "You are here.",
-          "rel": "self", "title": "Contacts"
+          "rel": "self",
+          "title": "Contacts"
       },
       {
           "href": "http://localhost:5000/contacts/50e737860ef3c42120601fae",
@@ -226,14 +214,7 @@ Date: Fri, 04 Jan 2013 20:11:50 GMT
 }</pre>
 </div>
 <p>Then let&#8217;s see the contact information :</p>
-<div class="highlight-python"><pre>$ curl -i http://localhost:5000/contacts/50e737860ef3c42120601fae
-HTTP/1.0 200 OK
-Content-Type: application/json
-Content-Length: 237
-ETag: "4a98c403225da6cab1b8f5557492a3c370666fe0"
-Server: Werkzeug/0.8.3 Python/2.7.3
-Date: Fri, 04 Jan 2013 20:14:58 GMT
-
+<div class="highlight-python"><pre>$ curl http://localhost:5000/contacts/50e737860ef3c42120601fae
 {
   "_id": "50e737860ef3c42120601fae",
   "firstname": "bilbo",
@@ -292,7 +273,7 @@ Date: Fri, 04 Jan 2013 20:14:58 GMT
     <li><a href="http://github.com/asdine/madame">Madame @ GitHub</a></li>
     <li><a href="http://github.com/asdine/madame/issues">Issue Tracker</a></li>
 </ul>
-<div style="margin-bottom: 30px;">
+<div style="margin-bottom: 10px;">
     <a href="https://twitter.com/asdine_" class="twitter-follow-button" data-show-count="false" data-lang="en">Follow @asdine_</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </div>
@@ -310,13 +291,13 @@ Date: Fri, 04 Jan 2013 20:14:58 GMT
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Tutorial</a><ul>
-<li><a class="reference internal" href="#the-goal">0 - The goal</a></li>
-<li><a class="reference internal" href="#the-folders">1 - The folders</a></li>
-<li><a class="reference internal" href="#the-configuration">2 - The configuration</a></li>
-<li><a class="reference internal" href="#the-database-schema">3 - The Database Schema</a></li>
-<li><a class="reference internal" href="#the-methods-allowed">4 - The methods allowed</a></li>
-<li><a class="reference internal" href="#the-server">5 - The server</a></li>
-<li><a class="reference internal" href="#the-final">6 - The final</a></li>
+<li><a class="reference internal" href="#the-goal">The goal</a></li>
+<li><a class="reference internal" href="#step-1-the-folders">Step 1 - The folders</a></li>
+<li><a class="reference internal" href="#step-2-the-configuration">Step 2 - The configuration</a></li>
+<li><a class="reference internal" href="#step-3-the-database-schema">Step 3 - The Database Schema</a></li>
+<li><a class="reference internal" href="#step-4-the-methods-allowed">Step 4 - The methods allowed</a></li>
+<li><a class="reference internal" href="#step-5-the-server">Step 5 - The server</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
 </ul>
@@ -324,7 +305,7 @@ Date: Fri, 04 Jan 2013 20:14:58 GMT
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
       <li>Previous: <a href="quickstart.html" title="previous chapter">Usage</a></li>
-      <li>Next: <a href="configuration.html" title="next chapter">Configuration</a></li>
+      <li>Next: <a href="configuration.html" title="next chapter">Configuration Handling</a></li>
   </ul></li>
 </ul>
   <h3>This Page</h3>

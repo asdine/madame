@@ -37,4 +37,5 @@ User’s Guide
    quickstart
    tutorial
    configuration
+   schemas
 

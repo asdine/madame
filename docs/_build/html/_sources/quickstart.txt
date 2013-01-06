@@ -23,4 +23,6 @@ Finally, run it::
   >>> app.run()
 
 
-That's it!
+Without configuration, your application is read-only and with no schemas.
+You would probably want to enable some collections. Go to the :ref:`tutorial` section to see how easy it is to configure Madame applications.
+
