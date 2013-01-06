@@ -3,9 +3,10 @@ Madame
 
 Madame is a dynamic RESTful API for MongoDB based on Flask.
 
-
 :Author: Asdine El Hrychy
 :Version: 0.1
+
+Release v0.1.2.a (`documentation <https://madame.readthedocs.org>`_)
 
 Features
 --------
