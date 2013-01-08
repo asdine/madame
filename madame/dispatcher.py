@@ -5,7 +5,10 @@ class Dispatcher(MethodView):
         self.app = app
 
     def get(self, collection=None, id=None):
-        print 'Collection : %s' % collection
-        print 'Id : %s' % id
-        return 'Salut'
+        if id:
+            return 'Id'
+        elif collection:
+            return 'Collection'
+        else:
+            return 'Root'
 

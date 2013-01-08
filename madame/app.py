@@ -14,9 +14,6 @@ import os, logging
 from flask import Flask, json, Blueprint, g
 from flask.ext.pymongo import PyMongo
 from madame.dispatcher import Dispatcher
-from madame.handler.root import RootHandler
-from madame.handler.collections import CollectionsHandler
-from madame.handler.items import ItemsHandler
 from madame.utils import get_main_path
 from pymongo.errors import ConnectionFailure
 from werkzeug.routing import BaseConverter
@@ -36,106 +33,94 @@ class Madame(Flask):
 
     Extend `Flask`
     """
-    def __init__(self, root_url=None, template_folder=None):
+    def __init__(self, url_prefix=None, template_folder=None):
         """
         :param root_url: root url for Madame
         :param template_folder:
             sets a different template folder
         """
-        if template_folder is None:
-            template_folder = os.path.join(get_main_path(), "templates")
+
+        #: If a template folder is provided, Madame will use it
+        #: Otherwise, the default Flask template path will be used
+        if not template_folder: template_folder = os.path.join(get_main_path(), "templates")
+
         super(Madame, self).__init__(__package__, template_folder=template_folder)
-        self.root_url = root_url
+
+        #: Save the url_prefix
+        self.url_prefix = url_prefix
+
+        #: Set the RegexConverter for custom collection names
         self.url_map.converters['regex'] = RegexConverter
-        self.load_config()
-        self.init_database()
-        self.load_schemas()
-        self.register()
 
-    def load_config(self):
-        """Loads config from default_settings.py, then tries to
-         load it from the file config.py and, if it fails,
-         loads it from the envvar 'MADAME_SETTINGS'
+        #: This dictionnary will contain the schemas for each collection.
+        self.DOMAINS = {}
 
-         Defaults :
-         DEBUG is set to TRUE
-        """
+        #: Each Madame app can be a blueprint
+        #: By default, Madame is set on /, but if a root_url is provided
+        #: a blueprint is set instead.
+        self.node = self
+
+        #: Configuration can be set with both config file and envvar.
+        #: Load config from default_settings.py
         self.config.from_object('madame.default_settings')
+
+        #: Try to load it from the file config.py
         try:
             file = os.path.join(get_main_path(), "config.py")
             self.config.from_pyfile(file, silent=False)
-        except IOError:
-            pass
+        except IOError: pass
+        #: Try to load config from the envvar 'MADAME_SETTINGS'
         try:
             self.config.from_envvar('MADAME_SETTINGS', silent=False)
-        except RuntimeError:
-            pass
+        except RuntimeError: pass
 
-    def init_database(self):
-        """ Tries to etablish a connection to the database.
-        Uses the MongoDB default IP address (localhost) and port (27017).
-        To select another IP address and port number, set it in the config file.
-        Example :
-        MONGO_HOST = <IPADDRESS>
-        MONGO_PORT = <PORT>
-        """
+        #: Schemas
+        #: A schema file has to be present in the root of the application
+
+        #: Selects a schema file in the configuration
+        #: The schema file has to be written in json format
+        #: Example, in the config file:
+        #:     SCHEMA_FILE = 'schemas.json'
+        if 'SCHEMA_FILE' in self.config:
+            try:
+                with open(self.config['SCHEMA_FILE']) as f:
+                    self.DOMAINS = json.loads(f.read())
+            except IOError as e:
+                logging.error(str(e))
+                exit(1)
+
+        #: Load the database handler
+        #: TODO support MySQL, PostgresSQL, Redis
         try:
-            self.mongo = PyMongo(self)
+            self.db = PyMongo(self)
             #g.mongo = self.mongo
         except ConnectionFailure as e:
             logging.error(str(e))
             exit(1)
 
-    def load_schemas(self):
-        """A schema file has to be present in the root of your application"""
+        #: If the user has set an url_prefix for the application,
+        #: set and register a blueprint for it.
+        if self.url_prefix:
+            self.node = Blueprint('madame', __package__, url_prefix=self.url_prefix)
 
-        #: Selects a schema file in your config
-        #: The schema file has to be written in json format
-        #: Example, in your config file:
-        #:     SCHEMA_FILE = 'schemas.json'
-        if 'SCHEMA_FILE' not in self.config:
-            self.DOMAINS = {}
-            return
-        try:
-            with open(self.config['SCHEMA_FILE']) as f:
-                self.DOMAINS = json.loads(f.read())
-        except IOError as e:
-            logging.error(str(e))
-            exit(1)
+        start_url = '/'
+        if 'URL_COLLECTION_RULE' in self.config:
+            collection_url = '<regex("%s"):collection>/' % self.config['URL_COLLECTION_RULE']
+        else: collection_url = '<collection>'
+        #: TODO add configuration value to set the item_url
+        item_url = '<ObjectId:id>'
 
-    def register(self):
-        """If the user has chosen a root url for the application,
-        this function sets and register a blueprint for it.
-        """
-        if self.root_url is not None:
-            self.root = Blueprint('madame', __package__, url_prefix=self.root_url)
-        else:
-            self.root = self
-        self.init_routes()
-        if self.root_url is not None:
-            self.register_blueprint(self.root)
-
-    def init_routes(self):
-        """ Creates all the routes
-
-        / GET, POST, PATCH
-        /<collectionname> GET, POST, DELETE
-        /<collectionname>/<document>/ GET, PATCH, DELETE
-        See :class:`Madame.handler.CollectionHandler` for more information.
-        """
-        """
-        root = RootHandler.as_view('root', app=self, mongo=self.mongo)
-        collections = CollectionsHandler.as_view('collection', app=self, mongo=self.mongo)
-        items = ItemsHandler.as_view('items', app=self, mongo=self.mongo)
-        self.root.add_url_rule('/', view_func=root, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-        self.root.add_url_rule('/<string:collection>/', view_func=collections, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-        self.root.add_url_rule('/<string:collection>/<ObjectId:id>', view_func=items, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-        """
-
+        #: Register endpoints
         dispatcher = Dispatcher.as_view('dispatcher', app=self)
-        url_root = '/'
-        url_collection = '<regex("%s"):collection>/' % self.config['URL_COLLECTION_RULE']
-        url_item = '<ObjectId:id>'
-        self.root.add_url_rule(url_root, view_func=dispatcher, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-        self.root.add_url_rule(url_root + url_collection, view_func=dispatcher, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
-        self.root.add_url_rule(url_root + url_collection + url_item, view_func=dispatcher, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+        self.register_endpoint(dispatcher, start_url)
+        self.register_endpoint(dispatcher, start_url + collection_url)
+        self.register_endpoint(dispatcher, start_url + collection_url + item_url)
+
+        if self.url_prefix:
+            self.register_blueprint(self.node)
+
+    def register_endpoint(self, obj, url):
+        """Registers a route to the Madame blueprint"""
+        self.node.add_url_rule(url, view_func=obj, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+
+
