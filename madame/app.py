@@ -31,15 +31,9 @@ class Madame(Flask):
     Creates a Flask app, load configuration and set a blueprint
     to attach the app at the given url.
 
-    Extend `Flask`
+    Extends `Flask`
     """
     def __init__(self, url_prefix=None, template_folder=None):
-        """
-        :param root_url: root url for Madame
-        :param template_folder:
-            sets a different template folder
-        """
-
         #: If a template folder is provided, Madame will use it
         #: Otherwise, the default Flask template path will be used
         if not template_folder: template_folder = os.path.join(get_main_path(), "templates")
