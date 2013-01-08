@@ -44,6 +44,7 @@ ITEM_PUT = False
 ITEM_PATCH = False
 ITEM_DELETE = False
 
-
 ROOT_TITLE = 'Content'
 ROOT_DESCRIPTION = 'List of collections'
+
+URL_COLLECTION_RULE = u'[a-zA-Z_]+[^/$]*'

@@ -15,6 +15,7 @@ import sys
 import urlparse
 from bson import ObjectId
 import os, hashlib
+from werkzeug.routing import BaseConverter
 
 
 def get_etag(value):

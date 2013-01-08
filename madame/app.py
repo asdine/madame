@@ -11,13 +11,21 @@
 """
 
 import os, logging
-from flask import Flask, json, Blueprint
+from flask import Flask, json, Blueprint, g
 from flask.ext.pymongo import PyMongo
+from madame.dispatcher import Dispatcher
 from madame.handler.root import RootHandler
 from madame.handler.collections import CollectionsHandler
 from madame.handler.items import ItemsHandler
 from madame.utils import get_main_path
 from pymongo.errors import ConnectionFailure
+from werkzeug.routing import BaseConverter
+
+class RegexConverter(BaseConverter):
+    def __init__(self, url_map, *items):
+        super(RegexConverter, self).__init__(url_map)
+        self.regex = items[0]
+
 
 class Madame(Flask):
     """
@@ -28,13 +36,8 @@ class Madame(Flask):
 
     Extend `Flask`
     """
-    def __init__(self, root_url=None,
-                 template_folder=None,
-                 root_methods=None,
-                 collection_methods=None,
-                 item_methods=None):
+    def __init__(self, root_url=None, template_folder=None):
         """
-
         :param root_url: root url for Madame
         :param template_folder:
             sets a different template folder
@@ -42,10 +45,8 @@ class Madame(Flask):
         if template_folder is None:
             template_folder = os.path.join(get_main_path(), "templates")
         super(Madame, self).__init__(__package__, template_folder=template_folder)
-        self.root_methods = root_methods
-        self.collection_methods = collection_methods
-        self.item_methods = item_methods
         self.root_url = root_url
+        self.url_map.converters['regex'] = RegexConverter
         self.load_config()
         self.init_database()
         self.load_schemas()
@@ -80,6 +81,7 @@ class Madame(Flask):
         """
         try:
             self.mongo = PyMongo(self)
+            #g.mongo = self.mongo
         except ConnectionFailure as e:
             logging.error(str(e))
             exit(1)
@@ -121,10 +123,19 @@ class Madame(Flask):
         /<collectionname>/<document>/ GET, PATCH, DELETE
         See :class:`Madame.handler.CollectionHandler` for more information.
         """
+        """
         root = RootHandler.as_view('root', app=self, mongo=self.mongo)
         collections = CollectionsHandler.as_view('collection', app=self, mongo=self.mongo)
         items = ItemsHandler.as_view('items', app=self, mongo=self.mongo)
         self.root.add_url_rule('/', view_func=root, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
         self.root.add_url_rule('/<string:collection>/', view_func=collections, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
         self.root.add_url_rule('/<string:collection>/<ObjectId:id>', view_func=items, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+        """
 
+        dispatcher = Dispatcher.as_view('dispatcher', app=self)
+        url_root = '/'
+        url_collection = '<regex("%s"):collection>/' % self.config['URL_COLLECTION_RULE']
+        url_item = '<ObjectId:id>'
+        self.root.add_url_rule(url_root, view_func=dispatcher, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+        self.root.add_url_rule(url_root + url_collection, view_func=dispatcher, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])
+        self.root.add_url_rule(url_root + url_collection + url_item, view_func=dispatcher, methods=['GET', 'POST', 'PATCH', 'PUT', 'DELETE'])

@@ -16,7 +16,7 @@ from flask.views import MethodView
 from madame.response import send_response, send_error
 from madame.utils import get_etag, format_args, get_document_link, get_self_link, get_parent_link
 from madame.validator import Validator
-from flask import request
+from flask import request, g
 from simplejson import JSONDecodeError
 from werkzeug.exceptions import abort
 
