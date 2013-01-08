@@ -13,16 +13,17 @@
 import os, logging
 from flask import Flask, json, Blueprint, g
 from flask.ext.pymongo import PyMongo
-from madame.dispatcher import Dispatcher
-from madame.utils import get_main_path
 from pymongo.errors import ConnectionFailure
 from werkzeug.routing import BaseConverter
+from .dispatcher import Dispatcher
+from .utils import get_main_path
+from .methods import default_endpoint_funcs
+
 
 class RegexConverter(BaseConverter):
     def __init__(self, url_map, *items):
         super(RegexConverter, self).__init__(url_map)
         self.regex = items[0]
-
 
 class Madame(Flask):
     """
@@ -33,6 +34,18 @@ class Madame(Flask):
 
     Extends `Flask`
     """
+
+    #: This dictionnary will contain the schemas for each collection.
+    DOMAINS = {}
+
+    #: This dictionnary will contain the endpoints for every request
+    endpoint_funcs = {}
+
+    #: Each Madame app can be a blueprint
+    #: By default, Madame is set on /, but if a root_url is provided
+    #: a blueprint is set instead.
+    node = None
+
     def __init__(self, url_prefix=None, template_folder=None):
         #: If a template folder is provided, Madame will use it
         #: Otherwise, the default Flask template path will be used
@@ -45,14 +58,6 @@ class Madame(Flask):
 
         #: Set the RegexConverter for custom collection names
         self.url_map.converters['regex'] = RegexConverter
-
-        #: This dictionnary will contain the schemas for each collection.
-        self.DOMAINS = {}
-
-        #: Each Madame app can be a blueprint
-        #: By default, Madame is set on /, but if a root_url is provided
-        #: a blueprint is set instead.
-        self.node = self
 
         #: Configuration can be set with both config file and envvar.
         #: Load config from default_settings.py
@@ -96,6 +101,7 @@ class Madame(Flask):
         #: set and register a blueprint for it.
         if self.url_prefix:
             self.node = Blueprint('madame', __package__, url_prefix=self.url_prefix)
+        else: self.node = self
 
         start_url = '/'
         if 'URL_COLLECTION_RULE' in self.config:
@@ -112,6 +118,9 @@ class Madame(Flask):
 
         if self.url_prefix:
             self.register_blueprint(self.node)
+
+        #: Set the default endpoint functions
+        self.endpoint_funcs = default_endpoint_funcs()
 
     def register_endpoint(self, obj, url):
         """Registers a route to the Madame blueprint"""
