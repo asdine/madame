@@ -19,7 +19,5 @@ def jsonify(data):
         mimetype='application/json')
 
 def send_json(obj):
-    if obj is None:
-        return ''
     return jsonify(obj)
 

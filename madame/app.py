@@ -92,7 +92,6 @@ class Madame(Flask):
         #: TODO support MySQL, PostgresSQL, Redis
         try:
             self.db = PyMongo(self)
-            #g.mongo = self.mongo
         except ConnectionFailure as e:
             logging.error(str(e))
             exit(1)
@@ -121,6 +120,9 @@ class Madame(Flask):
 
         #: Set the default endpoint functions
         self.endpoint_funcs = default_endpoint_funcs()
+
+        #: TODO : Set the default format functions
+
 
     def register_endpoint(self, obj, url):
         """Registers a route to the Madame blueprint"""
