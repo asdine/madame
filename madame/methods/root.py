@@ -1,17 +1,17 @@
 
-def get(ressource, args):
-    return 'ROOT GET'
+def get(args):
+    return 'ROOT GET', 'wesh', 201
 
-def post(ressource, args):
+def post(args):
     return 'ROOT POST'
 
-def put(ressource, args):
+def put(args):
     return 'ROOT PUT'
 
-def patch(ressource, args):
+def patch(args):
     return 'ROOT PATCH'
 
-def delete(ressource, args):
+def delete(args):
     return 'ROOT DELETE'
 
 def root_index():

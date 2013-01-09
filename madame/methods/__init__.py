@@ -4,8 +4,8 @@ from .items import item_index
 
 def default_endpoint_funcs():
     endpoints = {
-        'root' : root_index(),
-        'collections' : collection_index(),
-        'item' : collection_index()
+        'ROOT' : root_index(),
+        'COLLECTIONS' : collection_index(),
+        'ITEM' : collection_index()
     }
     return endpoints

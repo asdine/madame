@@ -35,10 +35,10 @@ class Madame(Flask):
     Extends `Flask`
     """
 
-    #: This dictionnary will contain the schemas for each collection.
+    #: This dictionary will contain the schemas for each collection.
     DOMAINS = {}
 
-    #: This dictionnary will contain the endpoints for every request
+    #: This dictionary will contain the endpoints for every request
     endpoint_funcs = {}
 
     #: Each Madame app can be a blueprint

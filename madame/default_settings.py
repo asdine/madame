@@ -44,7 +44,14 @@ ITEM_PUT = False
 ITEM_PATCH = False
 ITEM_DELETE = False
 
+#: Api informations
 ROOT_TITLE = 'Content'
 ROOT_DESCRIPTION = 'List of collections'
 
+#: Rule for the url
 URL_COLLECTION_RULE = u'[a-zA-Z_]+[^/$]*'
+
+#: Accepted mimetypes for POST, PUT, PATCH
+ACCEPTED_MIMETYPES = [
+    'application/json'
+]

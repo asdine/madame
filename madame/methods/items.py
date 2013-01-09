@@ -1,17 +1,17 @@
 
-def get(ressource, args):
+def get(collection, id, args):
     return 'ITEM GET'
 
-def post(ressource, args):
+def post(collection, id, args):
     return 'ITEM POST'
 
-def put(ressource, args):
+def put(collection, id, args):
     return 'ITEM PUT'
 
-def patch(ressource, args):
+def patch(collection, id, args):
     return 'ITEM PATCH'
 
-def delete(ressource, args):
+def delete(collection, id, args):
     return 'ITEM DELETE'
 
 def item_index():
