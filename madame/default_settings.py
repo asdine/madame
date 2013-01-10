@@ -27,8 +27,8 @@ DEBUG = True
 #: ~~~~~ Madame settings ~~~~~~~~
 
 #: For now, the only response type available is json
-#: TODO : RESPONSE_TYPE = 'xml'
-RESPONSE_TYPE = 'json'
+#: TODO : DEFAULT_RESPONSE_TYPE = 'xml'
+DEFAULT_RESPONSE_TYPE = 'json'
 
 #: Methods
 ROOT_GET = True
@@ -55,3 +55,5 @@ URL_COLLECTION_RULE = u'[a-zA-Z_]+[^/$]*'
 ACCEPTED_MIMETYPES = [
     'application/json'
 ]
+
+RENDERER = 'hateoas'

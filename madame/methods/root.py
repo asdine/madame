@@ -1,3 +1,5 @@
+from madame.utils import build_url
+from werkzeug.exceptions import abort
 
 def get(**pack):
     config = pack['config']
@@ -10,7 +12,7 @@ def get(**pack):
 
     children = []
     for collection in domains:
-        child = {'url' : collection}
+        child = {'url' : build_url(collection)}
         if 'title' in domains[collection]:
             child['title'] = domains[collection]['title']
         if 'description' in domains[collection]:
@@ -19,17 +21,38 @@ def get(**pack):
 
     return {'resource' : resource, 'children' : children}, 200
 
-def post(args):
-    return 'ROOT POST'
+def post(**pack):
+    args = pack['args']
+    domains = pack['domains']
+    app = pack['app']
+
+    domain, content = args.popitem()
+    if domain in domains:
+        return {'resource' : {'error' : 'ALREADY_EXISTS'}}, 401
+    else:
+        app.domains[domain] = content
+
+    #: TODO Location-header
+    return None, 201
+
 
 def put(args):
-    return 'ROOT PUT'
+    return None, 405
 
 def patch(args):
-    return 'ROOT PATCH'
+    return None, 405
 
-def delete(args):
-    return 'ROOT DELETE'
+def delete(**pack):
+    args = pack['args']
+    domains = pack['domains']
+    app = pack['app']
+
+    domain, content = args.popitem()
+    if domain in domains:
+        del app.domains[domain]
+    else:
+        abort(404)
+    return None, 204
 
 def root_index():
     index = {

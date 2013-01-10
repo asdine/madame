@@ -15,3 +15,4 @@ mimetable = {
 def mimeloader(data, mimetype):
     if mimetype in mimetable:
         return mimetable[mimetype](data)
+    return None

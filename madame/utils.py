@@ -14,9 +14,19 @@ import json
 import sys
 import urlparse
 from bson import ObjectId
+from flask import request
 import os, hashlib
 from werkzeug.routing import BaseConverter
 
+
+def build_url(resource, end_slash=False):
+    base_url = request.base_url
+    url = os.path.join(base_url, resource)
+    if end_slash: url += '/'
+    return url
+
+def unpack_response_data(data=None, status=200, headers=None):
+    return data, status, headers
 
 def get_etag(value):
     """Generates an etag for the given document.

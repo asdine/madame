@@ -11,13 +11,14 @@
 """
 
 import os, logging
-from flask import Flask, json, Blueprint, g
+from flask import Flask, json, Blueprint
 from flask.ext.pymongo import PyMongo
 from pymongo.errors import ConnectionFailure
 from werkzeug.routing import BaseConverter
 from .dispatcher import Dispatcher
 from .utils import get_main_path
 from .methods import default_endpoint_funcs
+from .response.styles import default_renderer_funcs
 
 
 class RegexConverter(BaseConverter):
@@ -83,7 +84,7 @@ class Madame(Flask):
         if 'SCHEMA_FILE' in self.config:
             try:
                 with open(self.config['SCHEMA_FILE']) as f:
-                    self.DOMAINS = json.loads(f.read())
+                    self.domains = json.loads(f.read())
             except IOError as e:
                 logging.error(str(e))
                 exit(1)
@@ -121,7 +122,10 @@ class Madame(Flask):
         #: Set the default endpoint functions
         self.endpoint_funcs = default_endpoint_funcs()
 
+        #:
+        self.renderer_funcs = default_renderer_funcs()
         #: TODO : Set the default format functions
+
 
 
     def register_endpoint(self, obj, url):
