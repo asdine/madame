@@ -1,8 +1,8 @@
 from flask import request, abort, Response
-from flask.views import MethodView, View
+from flask import current_app as app
+from flask.views import View
 from madame.mimetypes import mimeloader
 from madame.response import send_response
-from madame.response.send_json import jsonify
 from madame.utils import unpack_response_data
 
 def get_request_data():
@@ -19,23 +19,20 @@ def filter_request_data(app):
 
 class Dispatcher(View):
     methods = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
-    def __init__(self, app):
-        self.app = app
 
     def dispatch_request(self, collection=None, id=None):
         method = request.method
         resource = 'ROOT'
-        renderer = self.app.config['RENDERER']
+        renderer = app.config['RENDERER']
         pack = {
-            'app'   : self.app,
-            'config' : self.app.config,
-            'domains': self.app.domains
+            'app' : app,
+            'config' : app.config,
+            'domains': app.domains
         }
+        print request.accept_mimetypes
         headers = None
         status = 200
         response = ''
-
-        response_type = self.app.config['DEFAULT_RESPONSE_TYPE']
 
         if id: resource = 'ITEM'
         elif collection: resource = 'COLLECTION'
@@ -45,16 +42,16 @@ class Dispatcher(View):
 
         endpoint = "%s_%s" % (resource, method)
 
-        if not self.app.config[endpoint]: abort(405)
+        if not app.config[endpoint]: abort(405)
 
-        if collection and collection not in self.app.domains: abort(404)
+        if collection and collection not in app.domains: abort(404)
 
         if method in ('POST', 'PUT', 'PATCH'):
-            pack['args'] = filter_request_data(self.app)
+            pack['args'] = filter_request_data(app)
         else:
             pack['args'] = get_request_data()
 
-        response_data = self.app.endpoint_funcs[resource][method](**pack)
+        response_data = app.endpoint_funcs[resource][method](pack)
         if isinstance(response_data, tuple):
             data, status, headers = unpack_response_data(*response_data)
         elif isinstance(response_data, Response):
@@ -62,7 +59,7 @@ class Dispatcher(View):
         else: data = response_data
 
         if data:
-            rnd = self.app.renderer_funcs[renderer]()
+            rnd = app.renderer_funcs[renderer]()
             response = getattr(rnd, resource.lower())(data)
-        return send_response(response_type, response, status, headers)
+        return send_response(response, status, headers)
 

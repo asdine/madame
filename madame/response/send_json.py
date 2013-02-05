@@ -1,6 +1,5 @@
 import datetime
 import json
-from flask import Response
 from bson.objectid import ObjectId
 
 class APIEncoder(json.JSONEncoder):
@@ -15,8 +14,7 @@ class APIEncoder(json.JSONEncoder):
 
 
 def jsonify(data):
-    return Response(json.dumps(data, cls=APIEncoder),
-        mimetype='application/json')
+    return json.dumps(data, cls=APIEncoder)
 
 def send_json(obj):
     return jsonify(obj)

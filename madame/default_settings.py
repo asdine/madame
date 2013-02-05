@@ -28,7 +28,10 @@ DEBUG = True
 
 #: For now, the only response type available is json
 #: TODO : DEFAULT_RESPONSE_TYPE = 'xml'
-DEFAULT_RESPONSE_TYPE = 'json'
+DEFAULT_RESPONSE_TYPE = 'application/json'
+RESPONSE_TYPES = [
+    '*/*'
+]
 
 #: Methods
 ROOT_GET = True

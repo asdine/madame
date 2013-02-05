@@ -1,33 +1,27 @@
 from madame.utils import build_url
+from flask import current_app as app
 from werkzeug.exceptions import abort
 
-def get(**pack):
-    config = pack['config']
-    domains = pack['domains']
-
+def get(args):
     resource = {
-        'title' : config['ROOT_TITLE'],
-        'description' : config['ROOT_DESCRIPTION']
+        'title' : app.config['ROOT_TITLE'],
+        'description' : app.config['ROOT_DESCRIPTION']
     }
 
     children = []
-    for collection in domains:
+    for collection in app.domains:
         child = {'url' : build_url(collection)}
-        if 'title' in domains[collection]:
-            child['title'] = domains[collection]['title']
-        if 'description' in domains[collection]:
-            child['description'] = domains[collection]['description']
+        if 'title' in app.domains[collection]:
+            child['title'] = app.domains[collection]['title']
+        if 'description' in app.domains[collection]:
+            child['description'] = app.domains[collection]['description']
         children.append(child)
 
     return {'resource' : resource, 'children' : children}, 200
 
-def post(**pack):
-    args = pack['args']
-    domains = pack['domains']
-    app = pack['app']
-
+def post(args):
     domain, content = args.popitem()
-    if domain in domains:
+    if domain in app.domains:
         return {'resource' : {'error' : 'ALREADY_EXISTS'}}, 401
     else:
         app.domains[domain] = content
@@ -42,13 +36,9 @@ def put(args):
 def patch(args):
     return None, 405
 
-def delete(**pack):
-    args = pack['args']
-    domains = pack['domains']
-    app = pack['app']
-
+def delete(args):
     domain, content = args.popitem()
-    if domain in domains:
+    if domain in app.domains:
         del app.domains[domain]
     else:
         abort(404)

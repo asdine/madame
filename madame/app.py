@@ -111,7 +111,7 @@ class Madame(Flask):
         item_url = '<ObjectId:id>'
 
         #: Register endpoints
-        dispatcher = Dispatcher.as_view('dispatcher', app=self)
+        dispatcher = Dispatcher.as_view('dispatcher')
         self.register_endpoint(dispatcher, start_url)
         self.register_endpoint(dispatcher, start_url + collection_url)
         self.register_endpoint(dispatcher, start_url + collection_url + item_url)
