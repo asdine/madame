@@ -1,4 +1,4 @@
-Flask==0.9
+Flask==1.0
 Flask-PyMongo==0.2.1
 simplejson==2.6.2
 validictory==0.8.3
